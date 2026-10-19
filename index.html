@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+你是哪一型的行啟客？｜斗六行啟記念館
+</title>
+
+
+<style>
+
+/* =====================================================
+   基本設定
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    background: #f3eee6;
+
+    color: #40372f;
+
+    font-family:
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        Arial,
+        sans-serif;
+
+    line-height: 1.8;
+}
+
+button {
+
+    font-family: inherit;
+
+}
+
+.container {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin: auto;
+
+    padding: 25px 18px 70px;
+
+}
+
+
+/* =====================================================
+   首頁
+===================================================== */
+
+.hero {
+
+    min-height: 650px;
+
+    padding: 55px 40px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    border-radius: 28px;
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            rgba(72, 57, 44, 0.72),
+            rgba(72, 57, 44, 0.72)
+        ),
+
+        url("https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1400&q=80");
+
+    background-size: cover;
+
+    background-position: center;
+
+    box-shadow:
+        0 15px 40px rgba(70,55,40,.18);
+
+}
+
+.hero-small {
+
+    font-size: 14px;
+
+    letter-spacing: 3px;
+
+    opacity: .9;
+
+}
+
+.hero h1 {
+
+    font-size:
+        clamp(40px, 7vw, 64px);
+
+    line-height: 1.25;
+
+    margin: 15px 0 25px;
+
+}
+
+.hero p {
+
+    max-width: 650px;
+
+    font-size: 18px;
+
+}
+
+.start-button {
+
+    width: fit-content;
+
+    margin-top: 25px;
+
+    padding: 15px 32px;
+
+    border: none;
+
+    border-radius: 50px;
+
+    background: #fffaf2;
+
+    color: #654f3d;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+}
+
+.start-button:hover {
+
+    transform: translateY(-3px);
+
+}
+
+
+/* =====================================================
+   測驗
+===================================================== */
+
+.quiz {
+
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 35px;
+
+    background: #fffdf9;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 10px 30px rgba(70,55,40,.10);
+
+}
+
+.quiz.active {
+
+    display: block;
+
+}
+
+.question-number {
+
+    color: #72816d;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+}
+
+.progress-background {
+
+    height: 8px;
+
+    margin: 12px 0 30px;
+
+    background: #e4dbd0;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+}
+
+.progress-bar {
+
+    height: 100%;
+
+    width: 33%;
+
+    background: #72816d;
+
+    transition: .4s;
+
+}
+
+.question-title {
+
+    font-size: 28px;
+
+    line-height: 1.5;
+
+    margin-bottom: 25px;
+
+}
+
+.options {
+
+    display: grid;
+
+    gap: 14px;
+
+}
+
+.option {
+
+    width: 100%;
+
+    padding: 18px;
+
+    text-align: left;
+
+    border-radius: 16px;
+
+    border: 1.5px solid #ddd2c5;
+
+    background: white;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+    font-size: 16px;
+
+}
+
+.option:hover {
+
+    transform: translateY(-2px);
+
+    border-color: #a78b68;
+
+    background: #faf6ef;
+
+}
+
+.option.selected {
+
+    border: 2px solid #72816d;
+
+    background: #eef2eb;
+
+}
+
+.option-letter {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 32px;
+
+    height: 32px;
+
+    margin-right: 10px;
+
+    border-radius: 50%;
+
+    background: #e8dfd3;
+
+    font-weight: bold;
+
+}
+
+.next-button {
+
+    margin-top: 25px;
+
+    padding: 13px 25px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #654f3d;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+.next-button:disabled {
+
+    opacity: .35;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+   結果
+===================================================== */
+
+.result {
+
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 35px;
+
+    background: #fffdf9;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 10px 30px rgba(70,55,40,.10);
+
+}
+
+.result.active {
+
+    display: block;
+
+}
+
+.result-label {
+
+    color: #72816d;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
+
+}
+
+.result-card {
+
+    margin-top: 20px;
+
+    padding: 35px;
+
+    border-radius: 22px;
+
+    background: #f5efe6;
+
+    border-left: 7px solid #72816d;
+
+}
+
+.result-icon {
+
+    font-size: 55px;
+
+}
+
+.result-type {
+
+    font-size: 32px;
+
+    margin: 5px 0;
+
+}
+
+.result-subtitle {
+
+    color: #796a5c;
+
+    font-size: 19px;
+
+    margin-bottom: 25px;
+
+}
+
+.result-section {
+
+    margin-top: 20px;
+
+}
+
+.result-section strong {
+
+    display: block;
+
+    color: #654f3d;
+
+    margin-bottom: 5px;
+
+}
+
+.restart-button {
+
+    margin-top: 25px;
+
+    padding: 13px 25px;
+
+    border: 1px solid #654f3d;
+
+    border-radius: 12px;
+
+    background: transparent;
+
+    color: #654f3d;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+   行啟故事
+===================================================== */
+
+.history {
+
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 35px;
+
+    background: #fffdf9;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 10px 30px rgba(70,55,40,.10);
+
+}
+
+.history.active {
+
+    display: block;
+
+}
+
+.history-label {
+
+    color: #72816d;
+
+    font-size: 14px;
+
+    letter-spacing: 3px;
+
+    font-weight: bold;
+
+}
+
+.history h2 {
+
+    font-size: 30px;
+
+    line-height: 1.5;
+
+    margin: 8px 0 15px;
+
+}
+
+.history-intro {
+
+    color: #75685d;
+
+    font-size: 17px;
+
+    margin-bottom: 35px;
+
+}
+
+
+/* =====================================================
+   故事卡片
+===================================================== */
+
+.story {
+
+    border-top: 1px solid #e3dbd0;
+
+}
+
+.story-button {
+
+    width: 100%;
+
+    padding: 22px 5px;
+
+    border: none;
+
+    background: transparent;
+
+    display: flex;
+
+    align-items: center;
+
+    text-align: left;
+
+    cursor: pointer;
+
+}
+
+.story-number {
+
+    min-width: 50px;
+
+    color: #a78b68;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+}
+
+.story-title {
+
+    flex: 1;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: #654f3d;
+
+}
+
+.story-arrow {
+
+    font-size: 20px;
+
+    transition: .3s;
+
+}
+
+.story-content {
+
+    display: none;
+
+    padding:
+
+        0 20px
+
+        25px
+
+        55px;
+
+    color: #5d534a;
+
+}
+
+.story.open .story-content {
+
+    display: block;
+
+}
+
+.story.open .story-arrow {
+
+    transform: rotate(180deg);
+
+}
+
+
+/* =====================================================
+   最後重點
+===================================================== */
+
+.history-highlight {
+
+    margin-top: 30px;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background: #f2eee6;
+
+    text-align: center;
+
+}
+
+.history-highlight-icon {
+
+    font-size: 45px;
+
+}
+
+.history-highlight h3 {
+
+    font-size: 24px;
+
+    color: #654f3d;
+
+}
+
+.history-ending {
+
+    margin-top: 30px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    color: #654f3d;
+
+    font-size: 19px;
+
+}
+
+.history-ending span {
+
+    color: #a78b68;
+
+    font-size: 38px;
+
+}
+
+
+/* =====================================================
+   Footer
+===================================================== */
+
+.footer {
+
+    margin-top: 35px;
+
+    text-align: center;
+
+    color: #8b7d6e;
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================================
+   手機
+===================================================== */
+
+@media(max-width:600px) {
+
+    .container {
+
+        padding: 15px 12px 50px;
+
+    }
+
+    .hero {
+
+        min-height: 600px;
+
+        padding: 40px 25px;
+
+    }
+
+    .hero h1 {
+
+        font-size: 40px;
+
+    }
+
+    .hero p {
+
+        font-size: 16px;
+
+    }
+
+    .quiz,
+    .result,
+    .history {
+
+        padding: 22px;
+
+    }
+
+    .question-title {
+
+        font-size: 23px;
+
+    }
+
+    .result-card {
+
+        padding: 25px;
+
+    }
+
+    .result-type {
+
+        font-size: 27px;
+
+    }
+
+    .story-content {
+
+        padding-left: 45px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     首頁
+===================================================== -->
+
+<section class="hero" id="hero">
+
+    <div class="hero-small">
+
+        斗六行啟記念館｜互動策展
+
+    </div>
+
+
+    <h1>
+
+        你是哪一型的<br>
+
+        「行啟客」？
+
+    </h1>
+
+
+    <p>
+
+        天天經過，但你真的知道自己與行啟記念館的關係嗎？
+
+        <br>
+
+        花 30 秒，測出你的「行啟空間 DNA」，
+
+        看看什麼樣的空間會讓你願意走進這座古蹟。
+
+    </p>
+
+
+    <button
+        class="start-button"
+        onclick="startQuiz()"
+    >
+
+        開始測驗 →
+
+    </button>
+
+</section>
+
+
+
+<!-- =====================================================
+     測驗
+===================================================== -->
+
+<section
+    class="quiz"
+    id="quiz"
+>
+
+    <div
+        class="question-number"
+        id="questionNumber"
+    >
+
+        QUESTION 1 / 3
+
+    </div>
+
+
+    <div class="progress-background">
+
+        <div
+            class="progress-bar"
+            id="progressBar"
+        ></div>
+
+    </div>
+
+
+    <h2
+        class="question-title"
+        id="questionTitle"
+    ></h2>
+
+
+    <div
+        class="options"
+        id="options"
+    ></div>
+
+
+    <button
+        class="next-button"
+        id="nextButton"
+        onclick="nextQuestion()"
+        disabled
+    >
+
+        下一題 →
+
+    </button>
+
+</section>
+
+
+
+<!-- =====================================================
+     結果
+===================================================== -->
+
+<section
+    class="result"
+    id="result"
+>
+
+    <div class="result-label">
+
+        YOUR XINGQI DNA
+
+    </div>
+
+
+    <div id="resultCard"></div>
+
+
+    <button
+        class="restart-button"
+        onclick="restartQuiz()"
+    >
+
+        再測一次
+
+    </button>
+
+</section>
+
+
+
+<!-- =====================================================
+     行啟記念館故事
+===================================================== -->
+
+<section
+    class="history"
+    id="history"
+>
+
+    <div class="history-label">
+
+        ABOUT XINGQI
+
+    </div>
+
+
+    <h2>
+
+        測完了，
+
+        <br>
+
+        來認識一下行啟記念館的故事
+
+    </h2>
+
+
+    <p class="history-intro">
+
+        你可能每天經過它，
+
+        卻不一定知道，
+
+        這棟建築為什麼會出現在斗六。
+
+        <br><br>
+
+        點開下面的故事，
+
+        花一點時間認識這座陪著斗六走過不同時代的建築。
+
+    </p>
+
+
+
+    <!-- =================================================
+         故事 01
+    ================================================= -->
+
+    <div class="story">
+
+        <button
+            class="story-button"
+            onclick="toggleStory(this)"
+        >
+
+            <div class="story-number">
+                01
+            </div>
+
+            <div class="story-title">
+                「行啟」到底是什麼意思？
+            </div>
+
+            <div class="story-arrow">
+                ▼
+            </div>
+
+        </button>
+
+
+        <div class="story-content">
+
+            <p>
+
+                「行啟」是日治時期與日本皇族巡幸相關的用語。
+
+                1923 年，日本皇太子裕仁來臺進行巡幸，
+
+                當時臺灣各地也出現了與這次行程相關的紀念活動。
+
+            </p>
+
+            <p>
+
+                「行啟」兩個字，
+
+                因此也成為許多紀念性建築名稱的一部分。
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         故事 02
+    ================================================= -->
+
+    <div class="story">
+
+        <button
+            class="story-button"
+            onclick="toggleStory(this)"
+        >
+
+            <div class="story-number">
+                02
+            </div>
+
+            <div class="story-title">
+                裕仁皇太子真的來過斗六嗎？
+            </div>
+
+            <div class="story-arrow">
+                ▼
+            </div>
+
+        </button>
+
+
+        <div class="story-content">
+
+            <p>
+
+                這其實是一個很容易讓人誤會的地方。
+
+            </p>
+
+            <p>
+
+                裕仁皇太子的巡幸行程曾經經過斗六，
+
+                但當時火車是在斗六驛短暫停留、補充用水，
+
+                並沒有真正進入斗六市區參訪。
+
+            </p>
+
+            <p>
+
+                不過，地方仍然決定興建紀念性建築，
+
+                於是這座建築逐漸成為斗六地方歷史的一部分。
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         故事 03
+    ================================================= -->
+
+    <div class="story">
+
+        <button
+            class="story-button"
+            onclick="toggleStory(this)"
+        >
+
+            <div class="story-number">
+                03
+            </div>
+
+            <div class="story-title">
+                它一開始不只是「記念館」
+            </div>
+
+            <div class="story-arrow">
+                ▼
+            </div>
+
+        </button>
+
+
+        <div class="story-content">
+
+            <p>
+
+                行啟記念館早期除了具有紀念意義，
+
+                同時也具有地方公共空間的功能。
+
+            </p>
+
+            <p>
+
+                過去曾作為集會、講演、
+
+                學習、宴會及表演等活動使用，
+
+                某種程度上可以理解為早期地方社會的公共會館。
+
+            </p>
+
+            <p>
+
+                所以它從一開始，
+
+                就不只是「一棟用來紀念歷史的房子」，
+
+                而是和地方居民的生活有關。
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         故事 04
+    ================================================= -->
+
+    <div class="story">
+
+        <button
+            class="story-button"
+            onclick="toggleStory(this)"
+        >
+
+            <div class="story-number">
+                04
+            </div>
+
+            <div class="story-title">
+                不同時代，它有不同的身分
+            </div>
+
+            <div class="story-arrow">
+                ▼
+            </div>
+
+        </button>
+
+
+        <div class="story-content">
+
+            <p>
+
+                隨著時代改變，
+
+                行啟記念館也不斷出現新的使用方式。
+
+            </p>
+
+            <p>
+
+                建築曾經有政府相關辦公使用，
+
+                也曾與軍公教福利中心等地方生活記憶產生關聯。
+
+            </p>
+
+            <p>
+
+                因此，如果詢問不同世代的斗六人，
+
+                他們對行啟的記憶可能完全不一樣。
+
+            </p>
+
+            <p>
+
+                有人記得的是建築，
+
+                有人記得的是工作，
+
+                有人記得的是購物，
+
+                也有人只記得自己曾經從它旁邊經過。
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         故事 05
+    ================================================= -->
+
+    <div class="story">
+
+        <button
+            class="story-button"
+            onclick="toggleStory(this)"
+        >
+
+            <div class="story-number">
+                05
+            </div>
+
+            <div class="story-title">
+                九二一地震後，它曾經受過重創
+            </div>
+
+            <div class="story-arrow">
+                ▼
+            </div>
+
+        </button>
+
+
+        <div class="story-content">
+
+            <p>
+
+                1999 年九二一地震，
+
+                對行啟記念館造成明顯影響。
+
+            </p>
+
+            <p>
+
+                建築的磚牆出現裂縫與損壞，
+
+                木構造也有不同程度的問題。
+
+            </p>
+
+            <p>
+
+                後續經過修復工程，
+
+                建築在 2006 年完成修復，
+
+                並正式以「斗六行啟記念館」之名保存。
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         故事 06
+    ================================================= -->
+
+    <div class="story">
+
+        <button
+            class="story-button"
+            onclick="toggleStory(this)"
+        >
+
+            <div class="story-number">
+                06
+            </div>
+
+            <div class="story-title">
+                所以，行啟記念館到底是什麼？
+            </div>
+
+            <div class="story-arrow">
+                ▼
+            </div>
+
+        </button>
+
+
+        <div class="story-content">
+
+            <p>
+
+                如果只說它是一棟「日治時期的歷史建築」，
+
+                其實還不夠。
+
+            </p>
+
+            <p>
+
+                它曾經是紀念建築，
+
+                也是地方公共集會空間；
+
+                後來又承載了不同時代的政府使用
+
+                以及地方居民的生活記憶。
+
+            </p>
+
+            <p>
+
+                <strong>
+
+                    行啟真正有趣的地方，
+
+                    是同一棟建築在不同時代，
+
+                    被不同的人使用，
+
+                    也被賦予不同的意義。
+
+                </strong>
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         重點
+    ================================================= -->
+
+    <div class="history-highlight">
+
+        <div class="history-highlight-icon">
+            🏠
+        </div>
+
+
+        <h3>
+
+            一棟建築，也可以是一座城市的記憶
+
+        </h3>
+
+
+        <p>
+
+            從皇太子巡幸的歷史背景，
+
+            到地方居民的公共活動，
+
+            再到不同世代的生活記憶，
+
+            行啟記念館一直都在改變。
+
+        </p>
+
+
+        <p>
+
+            今天我們重新討論它的未來，
+
+            其實也正在問一個問題：
+
+            <strong>
+
+                下一個使用它的人，
+
+                會是誰？
+
+            </strong>
+
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================================
+         結尾
+    ================================================= -->
+
+    <div class="history-ending">
+
+        <span>「</span>
+
+
+        <p>
+
+            所以下次經過行啟的時候，
+
+            不妨想一下——
+
+            <br><br>
+
+            你看到的究竟是一棟老房子，
+
+            還是一座還在等待下一個故事的地方？
+
+        </p>
+
+
+        <span>」</span>
+
+    </div>
+
+
+</section>
+
+
+
+<div class="footer">
+
+    斗六舊城的人們｜行啟記念館再利用互動提案｜楊蕙瑜 著 
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   題目
+===================================================== */
+
+const questions = [
+
+    {
+
+        question:
+        "平常經過或來到行啟記念館周邊時，你最常在哪個角落佇足？",
+
+        answers: [
+
+            {
+                letter:"A",
+                text:
+                "在戶外草地與樹蔭下散步、吹風、坐著發呆休息",
+                type:"A"
+            },
+
+            {
+                letter:"B",
+                text:
+                "在廣場上滑滑板、拍限時動態、與朋友練舞休閒",
+                type:"B"
+            },
+
+            {
+                letter:"C",
+                text:
+                "在周邊風格咖啡廳、甜點店消費，享受舊城悠閒氣氛",
+                type:"C"
+            },
+
+            {
+                letter:"D",
+                text:
+                "偶爾走過看兩眼，但很少真正走進館內待著",
+                type:"D"
+            }
+
+        ]
+
+    },
+
+
+    {
+
+        question:
+        "提到「斗六行啟記念館」，你腦海中第一個浮現的印象是什麼？",
+
+        answers: [
+
+            {
+                letter:"A",
+                text:
+                "聽長輩說過這裡以前好像是「軍公教福利中心」的購物記憶",
+                type:"D"
+            },
+
+            {
+                letter:"B",
+                text:
+                "一座酷酷的、適合街頭運動與拍照的建築廣場",
+                type:"B"
+            },
+
+            {
+                letter:"C",
+                text:
+                "具日治歷史韻味，但平時比較安靜、不知道裡面有什麼的地方",
+                type:"C"
+            },
+
+            {
+                letter:"D",
+                text:
+                "常常經過，直到最近才開始注意到它的存在",
+                type:"D"
+            }
+
+        ]
+
+    },
+
+
+    {
+
+        question:
+        "如果有一天你願意「走進館內」待上整個下午，會是因為出現了什麼？",
+
+        answers: [
+
+            {
+                letter:"A",
+                text:
+                "安靜舒適的自修閱讀空間、或是充滿書香的獨立書店",
+                type:"A"
+            },
+
+            {
+                letter:"B",
+                text:
+                "充滿創意的青年文創市集、街頭音樂表演與風格手作攤位",
+                type:"B"
+            },
+
+            {
+                letter:"C",
+                text:
+                "可以在木造空間裡優雅品嘗手沖咖啡與在地甜點",
+                type:"C"
+            },
+
+            {
+                letter:"D",
+                text:
+                "復古柑仔店雜貨鋪、老照片對比牆與有趣的互動展覽",
+                type:"D"
+            }
+
+        ]
+
+    }
+
+];
+
+
+
+/* =====================================================
+   四種行啟客
+===================================================== */
+
+const resultTypes = {
+
+    A: {
+
+        icon:"📚",
+
+        name:"靜修漫步型",
+
+        subtitle:"綠蔭下的靈魂說書人",
+
+        dna:
+        "偏好安靜、舒壓與生活陪伴。",
+
+        current:
+        "你可能喜歡散步、休息、閱讀，或只是找一個舒服的地方待著。對你來說，空間不一定要很熱鬧，而是要讓人願意慢下來。",
+
+        future:
+        "如果行啟未來有安靜閱讀角、獨立書店、自修空間，或可以坐下來休息的場所，你可能會更願意走進館內。"
+
+    },
+
+
+    B: {
+
+        icon:"🛹",
+
+        name:"潮流風格型",
+
+        subtitle:"極限廣場的街頭探險家",
+
+        dna:
+        "充滿活力、追求自我表達與社群互動。",
+
+        current:
+        "你可能會把行啟周邊當成和朋友活動、滑板、拍照或展現自己的地方。對你而言，行啟不只是古蹟，也可以成為年輕人的公共空間。",
+
+        future:
+        "如果未來有青年展演、大學生策展、街頭活動或風格市集，你可能會更有理由從「經過」變成「走進去」。"
+
+    },
+
+
+    C: {
+
+        icon:"☕",
+
+        name:"質感休閒型",
+
+        subtitle:"老建築裡的品味生活家",
+
+        dna:
+        "注重氛圍體驗、喜歡舊城微旅行。",
+
+        current:
+        "你喜歡的不只是功能，而是空間帶來的氣氛。老建築、咖啡、甜點、慢慢逛街，這些元素會讓你覺得行啟與日常生活可以產生連結。",
+
+        future:
+        "如果出現咖啡、甜點、文創選品或其他能讓人慢慢停留的空間，你可能會願意把行啟安排進自己的日常或舊城散步路線。"
+
+    },
+
+
+    D: {
+
+        icon:"🔎",
+
+        name:"懷舊探索型",
+
+        subtitle:"時光隧道裡的記憶尋寶人",
+
+        dna:
+        "對地方故事好奇，也重視歷史與文化記憶。",
+
+        current:
+        "你可能知道行啟的一些故事，也可能只是經常經過、最近才開始注意它。比起大量文字，你更希望透過照片、人物故事與互動方式理解這棟建築。",
+
+        future:
+        "如果未來有老照片對比牆、居民口述故事、柑仔店或互動展覽，你可能會因為「想知道以前這裡到底發生過什麼」而走進去。"
+
+    }
+
+};
+
+
+
+/* =====================================================
+   變數
+===================================================== */
+
+let currentQuestion = 0;
+
+let answers = [];
+
+
+
+/* =====================================================
+   開始
+===================================================== */
+
+function startQuiz() {
+
+    document
+        .getElementById("hero")
+        .style.display = "none";
+
+
+    document
+        .getElementById("quiz")
+        .classList.add("active");
+
+
+    currentQuestion = 0;
+
+    answers = [];
+
+
+    showQuestion();
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+
+/* =====================================================
+   顯示題目
+===================================================== */
+
+function showQuestion() {
+
+    const question =
+        questions[currentQuestion];
+
+
+    document
+        .getElementById("questionNumber")
+        .textContent =
+        `QUESTION ${currentQuestion + 1} / 3`;
+
+
+    document
+        .getElementById("progressBar")
+        .style.width =
+        `${((currentQuestion + 1) / 3) * 100}%`;
+
+
+    document
+        .getElementById("questionTitle")
+        .textContent =
+        question.question;
+
+
+    const options =
+        document.getElementById("options");
+
+
+    options.innerHTML = "";
+
+
+    question.answers.forEach(
+        answer => {
+
+            const button =
+                document.createElement("button");
+
+
+            button.className = "option";
+
+
+            button.innerHTML = `
+
+                <span class="option-letter">
+
+                    ${answer.letter}
+
+                </span>
+
+                ${answer.text}
+
+            `;
+
+
+            button.onclick = function() {
+
+                document
+                    .querySelectorAll(".option")
+                    .forEach(
+                        item =>
+                        item.classList.remove("selected")
+                    );
+
+
+                button.classList.add("selected");
+
+
+                answers[currentQuestion] =
+                    answer.type;
+
+
+                document
+                    .getElementById("nextButton")
+                    .disabled = false;
+
+            };
+
+
+            options.appendChild(button);
+
+        }
+    );
+
+
+    document
+        .getElementById("nextButton")
+        .textContent =
+        currentQuestion === 2
+        ? "查看我的結果 →"
+        : "下一題 →";
+
+
+    document
+        .getElementById("nextButton")
+        .disabled = true;
+
+}
+
+
+
+/* =====================================================
+   下一題
+===================================================== */
+
+function nextQuestion() {
+
+    if (
+        answers[currentQuestion] === undefined
+    ) {
+
+        return;
+
+    }
+
+
+    if (currentQuestion < 2) {
+
+        currentQuestion++;
+
+        showQuestion();
+
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+    }
+
+    else {
+
+        showResult();
+
+    }
+
+}
+
+
+
+/* =====================================================
+   結果
+===================================================== */
+
+function showResult() {
+
+    const score = {
+
+        A:0,
+
+        B:0,
+
+        C:0,
+
+        D:0
+
+    };
+
+
+    answers.forEach(type => {
+
+        score[type]++;
+
+    });
+
+
+    let highest =
+        Object.keys(score)
+        .sort(
+            (a,b) =>
+            score[b] - score[a]
+        )[0];
+
+
+    /*
+       若平手，
+       以第三題作為判定。
+    */
+
+    const maxScore =
+        Math.max(...Object.values(score));
+
+
+    const tied =
+        Object.keys(score)
+        .filter(
+            type =>
+            score[type] === maxScore
+        );
+
+
+    if (
+        tied.includes(answers[2])
+    ) {
+
+        highest = answers[2];
+
+    }
+
+
+    const result =
+        resultTypes[highest];
+
+
+    document
+        .getElementById("resultCard")
+        .innerHTML = `
+
+        <div class="result-card">
+
+            <div class="result-icon">
+
+                ${result.icon}
+
+            </div>
+
+
+            <h2 class="result-type">
+
+                你是「${result.name}」
+
+            </h2>
+
+
+            <div class="result-subtitle">
+
+                ── ${result.subtitle} ──
+
+            </div>
+
+
+            <div class="result-section">
+
+                <strong>
+
+                    ✦ 你的空間 DNA
+
+                </strong>
+
+                ${result.dna}
+
+            </div>
+
+
+            <div class="result-section">
+
+                <strong>
+
+                    ✦ 你眼中的行啟
+
+                </strong>
+
+                ${result.current}
+
+            </div>
+
+
+            <div class="result-section">
+
+                <strong>
+
+                    ✦ 什麼會讓你走進去？
+
+                </strong>
+
+                ${result.future}
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById("quiz")
+        .classList.remove("active");
+
+
+    document
+        .getElementById("result")
+        .classList.add("active");
+
+
+    /*
+       顯示故事
+    */
+
+    document
+        .getElementById("history")
+        .classList.add("active");
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+
+/* =====================================================
+   故事開關
+===================================================== */
+
+function toggleStory(button) {
+
+    const story =
+        button.parentElement;
+
+
+    story.classList.toggle("open");
+
+}
+
+
+
+/* =====================================================
+   重新測驗
+===================================================== */
+
+function restartQuiz() {
+
+    currentQuestion = 0;
+
+    answers = [];
+
+
+    document
+        .getElementById("result")
+        .classList.remove("active");
+
+
+    document
+        .getElementById("history")
+        .classList.remove("active");
+
+
+    document
+        .getElementById("hero")
+        .style.display = "flex";
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
